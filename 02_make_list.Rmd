@@ -1,0 +1,107 @@
+---
+title: "02_Make_List"
+output: html_notebook
+---
+
+# Making the list of counties
+
+The porpuse of this notebook is to rank the counties by population, then assign them to students to file PIRs.
+
+- Rank the counties by population
+- Give each student one county from the top of the list.
+- Give each student an equal number of counties from the rest of the list.
+
+```{r}
+library(tidyverse)
+library(knitr)
+```
+
+
+## Load the data from disc
+
+```{r}
+tx_county_pop <- readRDS("data/tx_county_pop.rds")
+head(tx_county_pop)
+```
+
+## Give counties a ranking
+
+```{r}
+tx_county_pop <- tx_county_pop %>% 
+  arrange(desc(estimate)) %>% 
+  mutate(rank = dense_rank(desc(estimate)))
+tx_county_pop
+```
+
+## Make groups based on number of students
+
+```{r}
+numb_students = 38 #number of students in the class
+
+top_counties <- tx_county_pop %>% 
+  arrange(rank) %>% 
+  head(numb_students)
+
+small_counties <- tx_county_pop %>%
+  arrange(rank) %>% 
+  tail(n = 254 - numb_students)
+  
+```
+
+
+## Rank/select small counties
+
+The idea here is to generate a random number for the small counties to give each student the same number of counties (or as close as possible)
+
+
+```{r}
+your_n <- nrow(small_counties) # number of rows
+# 1. make a data frame with your_n rows, that has a column with equal numbers of 1,2,3,4,5...20s
+random_groups <- data_frame(
+  # make the column w equal numbers fo 1,2,3s, etc
+  group_assigned=rep(1:numb_students, length=your_n)) %>% 
+  # make a column full of random numbers
+  mutate(random_order=runif(n=your_n)) %>% 
+  # order by the random number column
+  arrange(random_order)
+# now the random_groups data frame has exactly the number of assignments to groups that you'd want, but ordered randomly.
+
+# 2. Just slap the columns from random_groups to the right of your actual data
+# using bind_cols instead of a join in order to maintain the random sorting done above
+small_counties <- small_counties %>%
+  bind_cols(random_groups) %>%
+  select(-random_order)
+small_counties
+```
+
+## Check distribution of the groups
+
+
+```{r}
+small_counties %>% 
+  group_by(group_assigned) %>% 
+  summarise(count = n())
+```
+
+## Order list and output
+
+```{r}
+small_counties %>% 
+  group_by(group_assigned) %>% 
+  arrange(group_assigned, NAME)
+
+```
+
+## Output data
+
+```{r}
+
+## save to disc
+saveRDS(small_counties, "data/small_counties.rds")
+saveRDS(top_counties, "data/top_counties.rds")
+
+## write csv to disc
+write_csv(small_counties, "data/small_counties.csv")
+write_csv(top_counties, "data/top_counties.csv")
+```
+

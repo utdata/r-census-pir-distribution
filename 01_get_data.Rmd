@@ -1,0 +1,59 @@
+---
+title: "Getting the data"
+output: html_notebook
+---
+
+# Getting the data
+
+- Using the `tidycensus` API to download the data.
+- I had to install my [API key](http://api.census.gov/data/key_signup.html)
+- That key gets installed in `.Renviron`. If it doesn't insall later, run `readRenviron("~/.Renviron")`.
+
+I will try to handle the other tasks in another notebook.
+
+```{r}
+library(tidyverse)
+library(censusapi)
+library(tidycensus)
+```
+
+## Finding the variables
+
+`tidycensus` has a `load_variables` [function](https://walkerke.github.io/tidycensus/articles/basic-usage.html#searching-for-variables) to help find and search for the fields you need.
+
+
+```{r}
+v15 <- load_variables(2017, "acs5", cache = TRUE)
+
+View(v15)
+```
+
+## Get the data
+
+These are 5-year estimates from the 2013-2017 American Community Survey 5-Year Estimates table.
+
+```{r}
+tx_county_pop <- get_acs(geography = "county",
+                         year = 2017,
+                         variables = c(pop17 = "B01003_001"),
+                         state = "TX")
+head(tx_county_pop)
+```
+
+## Checking Harris County
+
+Just to make sure I have [the right data](https://factfinder.census.gov/bkmk/cf/1.0/en/county/Harris County, Texas/POPULATION/ACS_EST).
+
+```{r}
+tx_county_pop %>% 
+  filter(NAME == "Harris County, Texas")
+```
+
+## Save data to disc
+
+This is so I don't have to download the data again to run analysis.
+
+```{r}
+saveRDS(tx_county_pop, "data/tx_county_pop.rds")
+```
+
