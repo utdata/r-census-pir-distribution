@@ -56,7 +56,7 @@ The idea here is to generate a random number for the small counties to give each
 
 small_counties <- small_counties %>% 
   mutate(group_assigned=sample(rep(1:numb_students, length=nrow(small_counties)), replace=FALSE))
-new_small
+small_counties
 ```
 
 ### Check the samples 
