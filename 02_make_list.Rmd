@@ -48,40 +48,25 @@ small_counties <- tx_county_pop %>%
   
 ```
 
-
 ## Rank/select small counties
 
 The idea here is to generate a random number for the small counties to give each student the same number of counties (or as close as possible)
 
-
 ```{r}
-your_n <- nrow(small_counties) # number of rows
-# 1. make a data frame with your_n rows, that has a column with equal numbers of 1,2,3,4,5...20s
-random_groups <- data_frame(
-  # make the column w equal numbers fo 1,2,3s, etc
-  group_assigned=rep(1:numb_students, length=your_n)) %>% 
-  # make a column full of random numbers
-  mutate(random_order=runif(n=your_n)) %>% 
-  # order by the random number column
-  arrange(random_order)
-# now the random_groups data frame has exactly the number of assignments to groups that you'd want, but ordered randomly.
 
-# 2. Just slap the columns from random_groups to the right of your actual data
-# using bind_cols instead of a join in order to maintain the random sorting done above
-small_counties <- small_counties %>%
-  bind_cols(random_groups) %>%
-  select(-random_order)
-small_counties
+small_counties <- small_counties %>% 
+  mutate(group_assigned=sample(rep(1:numb_students, length=nrow(small_counties)), replace=FALSE))
+new_small
 ```
 
-## Check distribution of the groups
-
+### Check the samples 
 
 ```{r}
 small_counties %>% 
   group_by(group_assigned) %>% 
   summarise(count = n())
 ```
+
 
 ## Order list and output
 
