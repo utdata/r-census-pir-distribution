@@ -176,34 +176,20 @@ $(document).ready(function () {
 
 
 <!-- rnb-text-begin -->
-<div id="getting-the-data" class="section level1">
-<h1>Getting the data</h1>
 <ul>
 <li>Using the <code>tidycensus</code> API to download the data.</li>
 <li>I had to install my <a href="http://api.census.gov/data/key_signup.html">API key</a></li>
 <li>That key gets installed in <code>.Renviron</code>. If it doesn’t insall later, run <code>readRenviron(&quot;~/.Renviron&quot;)</code>.</li>
 </ul>
-<p>I will try to handle the other tasks in another notebook.</p>
+<p>I will handle the other tasks in another notebook.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5saWJyYXJ5KGNlbnN1c2FwaSlcbmBgYCJ9 -->
-<pre class="r"><code>library(tidyverse)
-library(censusapi)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5gYGAifQ== -->
+<pre class="r"><code>library(tidyverse)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYY2Vuc3VzYXBp4oCZXG5cblRoZSBmb2xsb3dpbmcgb2JqZWN0IGlzIG1hc2tlZCBmcm9tIOKAmHBhY2thZ2U6bWV0aG9kc+KAmTpcblxuICAgIGdldEZ1bmN0aW9uXG4ifQ== -->
-<pre><code>
-Attaching package: ‘censusapi’
-
-The following object is masked from ‘package:methods’:
-
-    getFunction</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5Y2Vuc3VzKVxuYGBgIn0= -->
 <pre class="r"><code>library(tidycensus)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoicGFja2FnZSDigJh0aWR5Y2Vuc3Vz4oCZIHdhcyBidWlsdCB1bmRlciBSIHZlcnNpb24gMy41LjJcbiJ9 -->
-<pre><code>package ‘tidycensus’ was built under R version 3.5.2</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <div id="finding-the-variables" class="section level2">
@@ -211,9 +197,11 @@ The following object is masked from ‘package:methods’:
 <p><code>tidycensus</code> has a <code>load_variables</code> <a href="https://walkerke.github.io/tidycensus/articles/basic-usage.html#searching-for-variables">function</a> to help find and search for the fields you need.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudjE1IDwtIGxvYWRfdmFyaWFibGVzKDIwMTcsIFwiYWNzNVwiLCBjYWNoZSA9IFRSVUUpXG5WaWV3KHYxNSlcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudjE1IDwtIGxvYWRfdmFyaWFibGVzKDIwMTcsIFwiYWNzNVwiLCBjYWNoZSA9IFRSVUUpXG4jIyBVc2UgdGhpcyB0byB2aWV3IGFuZCBmaWx0ZXIgdGhlIGxpc3RcbiMjIENvbW1lbnRlZCBvdXQgJ2NhdXNlIEkgYWxyZWFkeSB1c2VkIGl0XG4jIFZpZXcodjE1KVxuYGBgIn0= -->
 <pre class="r"><code>v15 &lt;- load_variables(2017, &quot;acs5&quot;, cache = TRUE)
-View(v15)</code></pre>
+## Use this to view and filter the list
+## Commented out 'cause I already used it
+# View(v15)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -277,9 +265,8 @@ Using FIPS code '48' for state 'TX'</code></pre>
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 </div>
-</div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiR2V0dGluZyB0aGUgZGF0YSIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyBHZXR0aW5nIHRoZSBkYXRhCgotIFVzaW5nIHRoZSBgdGlkeWNlbnN1c2AgQVBJIHRvIGRvd25sb2FkIHRoZSBkYXRhLgotIEkgaGFkIHRvIGluc3RhbGwgbXkgW0FQSSBrZXldKGh0dHA6Ly9hcGkuY2Vuc3VzLmdvdi9kYXRhL2tleV9zaWdudXAuaHRtbCkKLSBUaGF0IGtleSBnZXRzIGluc3RhbGxlZCBpbiBgLlJlbnZpcm9uYC4gSWYgaXQgZG9lc24ndCBpbnNhbGwgbGF0ZXIsIHJ1biBgcmVhZFJlbnZpcm9uKCJ+Ly5SZW52aXJvbiIpYC4KCkkgd2lsbCB0cnkgdG8gaGFuZGxlIHRoZSBvdGhlciB0YXNrcyBpbiBhbm90aGVyIG5vdGVib29rLgoKYGBge3J9CmxpYnJhcnkodGlkeXZlcnNlKQpsaWJyYXJ5KGNlbnN1c2FwaSkKbGlicmFyeSh0aWR5Y2Vuc3VzKQpgYGAKCiMjIEZpbmRpbmcgdGhlIHZhcmlhYmxlcwoKYHRpZHljZW5zdXNgIGhhcyBhIGBsb2FkX3ZhcmlhYmxlc2AgW2Z1bmN0aW9uXShodHRwczovL3dhbGtlcmtlLmdpdGh1Yi5pby90aWR5Y2Vuc3VzL2FydGljbGVzL2Jhc2ljLXVzYWdlLmh0bWwjc2VhcmNoaW5nLWZvci12YXJpYWJsZXMpIHRvIGhlbHAgZmluZCBhbmQgc2VhcmNoIGZvciB0aGUgZmllbGRzIHlvdSBuZWVkLgoKCmBgYHtyfQp2MTUgPC0gbG9hZF92YXJpYWJsZXMoMjAxNywgImFjczUiLCBjYWNoZSA9IFRSVUUpCgpWaWV3KHYxNSkKYGBgCgojIyBHZXQgdGhlIGRhdGEKClRoZXNlIGFyZSA1LXllYXIgZXN0aW1hdGVzIGZyb20gdGhlIDIwMTMtMjAxNyBBbWVyaWNhbiBDb21tdW5pdHkgU3VydmV5IDUtWWVhciBFc3RpbWF0ZXMgdGFibGUuCgpgYGB7cn0KdHhfY291bnR5X3BvcCA8LSBnZXRfYWNzKGdlb2dyYXBoeSA9ICJjb3VudHkiLAogICAgICAgICAgICAgICAgICAgICAgICAgeWVhciA9IDIwMTcsCiAgICAgICAgICAgICAgICAgICAgICAgICB2YXJpYWJsZXMgPSBjKHBvcDE3ID0gIkIwMTAwM18wMDEiKSwKICAgICAgICAgICAgICAgICAgICAgICAgIHN0YXRlID0gIlRYIikKaGVhZCh0eF9jb3VudHlfcG9wKQpgYGAKCiMjIENoZWNraW5nIEhhcnJpcyBDb3VudHkKCkp1c3QgdG8gbWFrZSBzdXJlIEkgaGF2ZSBbdGhlIHJpZ2h0IGRhdGFdKGh0dHBzOi8vZmFjdGZpbmRlci5jZW5zdXMuZ292L2JrbWsvY2YvMS4wL2VuL2NvdW50eS9IYXJyaXMgQ291bnR5LCBUZXhhcy9QT1BVTEFUSU9OL0FDU19FU1QpLgoKYGBge3J9CnR4X2NvdW50eV9wb3AgJT4lIAogIGZpbHRlcihOQU1FID09ICJIYXJyaXMgQ291bnR5LCBUZXhhcyIpCmBgYAoKIyMgU2F2ZSBkYXRhIHRvIGRpc2MKClRoaXMgaXMgc28gSSBkb24ndCBoYXZlIHRvIGRvd25sb2FkIHRoZSBkYXRhIGFnYWluIHRvIHJ1biBhbmFseXNpcy4KCmBgYHtyfQpzYXZlUkRTKHR4X2NvdW50eV9wb3AsICJkYXRhL3R4X2NvdW50eV9wb3AucmRzIikKYGBgCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiR2V0dGluZyB0aGUgZGF0YSIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKLSBVc2luZyB0aGUgYHRpZHljZW5zdXNgIEFQSSB0byBkb3dubG9hZCB0aGUgZGF0YS4KLSBJIGhhZCB0byBpbnN0YWxsIG15IFtBUEkga2V5XShodHRwOi8vYXBpLmNlbnN1cy5nb3YvZGF0YS9rZXlfc2lnbnVwLmh0bWwpCi0gVGhhdCBrZXkgZ2V0cyBpbnN0YWxsZWQgaW4gYC5SZW52aXJvbmAuIElmIGl0IGRvZXNuJ3QgaW5zYWxsIGxhdGVyLCBydW4gYHJlYWRSZW52aXJvbigifi8uUmVudmlyb24iKWAuCgpJIHdpbGwgaGFuZGxlIHRoZSBvdGhlciB0YXNrcyBpbiBhbm90aGVyIG5vdGVib29rLgoKYGBge3IgcmVzdWx0cz0iaGlkZSJ9CmxpYnJhcnkodGlkeXZlcnNlKQpsaWJyYXJ5KHRpZHljZW5zdXMpCmBgYAoKIyMgRmluZGluZyB0aGUgdmFyaWFibGVzCgpgdGlkeWNlbnN1c2AgaGFzIGEgYGxvYWRfdmFyaWFibGVzYCBbZnVuY3Rpb25dKGh0dHBzOi8vd2Fsa2Vya2UuZ2l0aHViLmlvL3RpZHljZW5zdXMvYXJ0aWNsZXMvYmFzaWMtdXNhZ2UuaHRtbCNzZWFyY2hpbmctZm9yLXZhcmlhYmxlcykgdG8gaGVscCBmaW5kIGFuZCBzZWFyY2ggZm9yIHRoZSBmaWVsZHMgeW91IG5lZWQuCgoKYGBge3J9CnYxNSA8LSBsb2FkX3ZhcmlhYmxlcygyMDE3LCAiYWNzNSIsIGNhY2hlID0gVFJVRSkKCiMjIFVzZSB0aGlzIHRvIHZpZXcgYW5kIGZpbHRlciB0aGUgbGlzdAojIyBDb21tZW50ZWQgb3V0ICdjYXVzZSBJIGFscmVhZHkgdXNlZCBpdAojIFZpZXcodjE1KQpgYGAKCiMjIEdldCB0aGUgZGF0YQoKVGhlc2UgYXJlIDUteWVhciBlc3RpbWF0ZXMgZnJvbSB0aGUgMjAxMy0yMDE3IEFtZXJpY2FuIENvbW11bml0eSBTdXJ2ZXkgNS1ZZWFyIEVzdGltYXRlcyB0YWJsZS4KCmBgYHtyfQp0eF9jb3VudHlfcG9wIDwtIGdldF9hY3MoZ2VvZ3JhcGh5ID0gImNvdW50eSIsCiAgICAgICAgICAgICAgICAgICAgICAgICB5ZWFyID0gMjAxNywKICAgICAgICAgICAgICAgICAgICAgICAgIHZhcmlhYmxlcyA9IGMocG9wMTcgPSAiQjAxMDAzXzAwMSIpLAogICAgICAgICAgICAgICAgICAgICAgICAgc3RhdGUgPSAiVFgiKQpoZWFkKHR4X2NvdW50eV9wb3ApCmBgYAoKIyMgQ2hlY2tpbmcgSGFycmlzIENvdW50eQoKSnVzdCB0byBtYWtlIHN1cmUgSSBoYXZlIFt0aGUgcmlnaHQgZGF0YV0oaHR0cHM6Ly9mYWN0ZmluZGVyLmNlbnN1cy5nb3YvYmttay9jZi8xLjAvZW4vY291bnR5L0hhcnJpcyBDb3VudHksIFRleGFzL1BPUFVMQVRJT04vQUNTX0VTVCkuCgpgYGB7cn0KdHhfY291bnR5X3BvcCAlPiUgCiAgZmlsdGVyKE5BTUUgPT0gIkhhcnJpcyBDb3VudHksIFRleGFzIikKYGBgCgojIyBTYXZlIGRhdGEgdG8gZGlzYwoKVGhpcyBpcyBzbyBJIGRvbid0IGhhdmUgdG8gZG93bmxvYWQgdGhlIGRhdGEgYWdhaW4gdG8gcnVuIGFuYWx5c2lzLgoKYGBge3J9CnNhdmVSRFModHhfY291bnR5X3BvcCwgImRhdGEvdHhfY291bnR5X3BvcC5yZHMiKQpgYGAKCg==</div>
 
 
 

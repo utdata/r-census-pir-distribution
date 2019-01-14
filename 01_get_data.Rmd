@@ -3,17 +3,14 @@ title: "Getting the data"
 output: html_notebook
 ---
 
-# Getting the data
-
 - Using the `tidycensus` API to download the data.
 - I had to install my [API key](http://api.census.gov/data/key_signup.html)
 - That key gets installed in `.Renviron`. If it doesn't insall later, run `readRenviron("~/.Renviron")`.
 
-I will try to handle the other tasks in another notebook.
+I will handle the other tasks in another notebook.
 
-```{r}
+```{r results="hide"}
 library(tidyverse)
-library(censusapi)
 library(tidycensus)
 ```
 
@@ -25,7 +22,9 @@ library(tidycensus)
 ```{r}
 v15 <- load_variables(2017, "acs5", cache = TRUE)
 
-View(v15)
+## Use this to view and filter the list
+## Commented out 'cause I already used it
+# View(v15)
 ```
 
 ## Get the data

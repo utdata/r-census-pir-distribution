@@ -1,17 +1,15 @@
 ---
-title: "02_Make_List"
+title: "Making list, assign counties"
 output: html_notebook
 ---
 
-# Making the list of counties
-
-The porpuse of this notebook is to rank the counties by population, then assign them to students to file PIRs.
+The purpose of this notebook is to rank the counties by population, then assign them to students to file PIRs.
 
 - Rank the counties by population
 - Give each student one county from the top of the list.
 - Give each student an equal number of counties from the rest of the list.
 
-```{r}
+```{r results="hide"}
 library(tidyverse)
 library(knitr)
 ```
@@ -35,6 +33,9 @@ tx_county_pop
 
 ## Make groups based on number of students
 
+- Pull the `top_counties` based on the number of students. Each student would get one.
+- Create a `small_counties` based on the remainder
+
 ```{r}
 numb_students = 38 #number of students in the class
 
@@ -45,12 +46,11 @@ top_counties <- tx_county_pop %>%
 small_counties <- tx_county_pop %>%
   arrange(rank) %>% 
   tail(n = 254 - numb_students)
-  
 ```
 
 ## Rank/select small counties
 
-The idea here is to generate a random number for the small counties to give each student the same number of counties (or as close as possible)
+The idea here is to generate a random number for the small counties to give each student the same number of counties (or as close as possible).
 
 ```{r}
 
@@ -68,7 +68,7 @@ small_counties %>%
 ```
 
 
-## Order list and output
+### Order list and output
 
 ```{r}
 small_counties %>% 
