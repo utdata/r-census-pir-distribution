@@ -1,4 +1,4 @@
-# r-census-pir-distribution
+# r-pir-distribution
 
 Project to randomly select counties for students for public information requests (or whatever purpose.) Idea is each student would one of the most populous counties, then a a number of smaller counties selected randomly.
 
