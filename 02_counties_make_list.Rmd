@@ -12,7 +12,7 @@ The purpose of this notebook is to rank the counties by population, then assign 
 - Give each student one county from the top of the list.
 - Give each student an equal number of counties from the rest of the list.
 
-```{r results="hide"}
+```{r libraries, message=FALSE}
 library(tidyverse)
 ```
 

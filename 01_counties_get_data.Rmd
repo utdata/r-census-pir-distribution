@@ -12,7 +12,7 @@ knit: (function(inputFile, encoding) { rmarkdown::render(inputFile, encoding = e
 
 I will handle the other tasks in another notebook.
 
-```{r libraries, results="hide"}
+```{r libraries, message=FALSE}
 library(tidyverse)
 library(tidycensus)
 ```
