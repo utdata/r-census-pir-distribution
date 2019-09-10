@@ -14,5 +14,5 @@ Project to randomly select counties for students for public information requests
 
 These will be split based on the most recent running and `numb_students` setting.
 
-- [large_counties.csv](https://github.com/utdata/r-pir-distribution/blob/master/data/large_counties.csv?raw=true)
+- [top_counties.csv](https://github.com/utdata/r-pir-distribution/blob/master/data/top_counties.csv?raw=true)
 - [small_counties.csv](https://github.com/utdata/r-pir-distribution/blob/master/data/small_counties.csv?raw=true)
