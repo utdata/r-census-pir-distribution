@@ -1,6 +1,9 @@
 ---
 title: "Making list, assign counties"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
+knit: (function(inputFile, encoding) { rmarkdown::render(inputFile, encoding = encoding, output_dir = "docs") })
 ---
 
 The purpose of this notebook is to rank the counties by population, then assign them to students to file PIRs.
@@ -11,7 +14,6 @@ The purpose of this notebook is to rank the counties by population, then assign 
 
 ```{r results="hide"}
 library(tidyverse)
-library(knitr)
 ```
 
 

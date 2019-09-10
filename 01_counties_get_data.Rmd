@@ -1,6 +1,9 @@
 ---
 title: "Getting the data"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
+knit: (function(inputFile, encoding) { rmarkdown::render(inputFile, encoding = encoding, output_dir = "docs") })
 ---
 
 - Using the `tidycensus` API to download the data.
@@ -9,22 +12,21 @@ output: html_notebook
 
 I will handle the other tasks in another notebook.
 
-```{r results="hide"}
+```{r libraries, results="hide"}
 library(tidyverse)
 library(tidycensus)
 ```
+
 
 ## Finding the variables
 
 `tidycensus` has a `load_variables` [function](https://walkerke.github.io/tidycensus/articles/basic-usage.html#searching-for-variables) to help find and search for the fields you need.
 
+This is commented out because I do not need it on subsequent runs once I found the variable I needed, which was `B01003_001`.
 
 ```{r}
-v15 <- load_variables(2017, "acs5", cache = TRUE)
-
-## Use this to view and filter the list
-## Commented out 'cause I already used it
-# View(v15)
+# v17 <- load_variables(2017, "acs5", cache = TRUE)
+# View(v17)
 ```
 
 ## Get the data
