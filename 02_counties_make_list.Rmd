@@ -39,7 +39,7 @@ tx_county_pop
 - Create a `small_counties` based on the remainder
 
 ```{r}
-numb_students = 38 #number of students in the class
+numb_students = 36 #number of students in the class
 
 top_counties <- tx_county_pop %>% 
   arrange(rank) %>% 
